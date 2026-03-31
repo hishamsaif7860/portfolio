@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,26 +83,33 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       background: linear-gradient(135deg, var(--primary), var(--accent));
+      background-size: 200% 200%;
       color: #fff;
-      padding: 10px 16px;
+      padding: 11px 18px;
       border-radius: 999px;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 0.15px;
       cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+      transition: transform 0.14s ease, box-shadow 0.22s ease, opacity 0.2s ease, background-position 0.3s ease;
+      box-shadow: 0 12px 28px rgba(56, 189, 248, 0.26);
     }
     [data-theme="light"] button {
       border-color: rgba(15, 23, 42, 0.1);
     }
     .secondary {
-      background: transparent;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
       color: var(--text);
       border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: none;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
       border-radius: 999px;
       padding: 9px 16px;
+    }
+    .secondary:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
     }
     .icon {
       width: 16px;
@@ -115,7 +122,17 @@
       display: block;
       fill: currentColor;
     }
-    button:hover, .link-btn:hover { transform: translateY(-1px); opacity: 0.95; }
+    button:hover, .link-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.97;
+      background-position: 100% 0;
+      box-shadow: 0 16px 34px rgba(56, 189, 248, 0.3);
+    }
+    button:focus-visible, .link-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18), 0 18px 36px rgba(56, 189, 248, 0.3);
+    }
     main { margin-top: 18px; display: grid; gap: 18px; }
     .panel {
       background: var(--panel);
@@ -284,9 +301,84 @@
       background-size: auto, auto, auto, 140px 140px, 140px 140px;
       background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
     }
+    .current-project-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    [data-theme="light"] .current-project-card {
+      background: #fff;
+      border-color: rgba(37, 99, 235, 0.18);
+    }
+    .current-project-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.12);
+      color: #22c55e;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse-dot 1.6s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.75); }
+    }
+    .current-project-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .visit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.18s ease;
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.22);
+    }
+    .visit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(56, 189, 248, 0.32); }
     @media (max-width: 820px) {
       .hero { grid-template-columns: 1fr; }
       header { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 640px) {
+      header { align-items: center; }
+      .actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+      .actions > * {
+        flex: 1 1 140px;
+        justify-content: center;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -315,8 +407,8 @@
           <span>GitHub</span>
         </a>
         <div class="toggle-group" role="group" aria-label="Theme toggle">
-          <button class="toggle-option" id="lightMode" type="button">Light</button>
-          <button class="toggle-option active" id="darkMode" type="button">Dark</button>
+          <button class="toggle-option active" id="lightMode" type="button">Light</button>
+          <button class="toggle-option" id="darkMode" type="button">Dark</button>
         </div>
         <a class="link-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=hishamsaif7860@gmail.com" target="_blank" rel="noreferrer">Contact</a>
       </div>
@@ -353,6 +445,13 @@
 
       <section class="panel">
         <div class="section-title">
+          <h2>Ongoing / Current Projects</h2>
+        </div>
+        <div id="currentProjectsGrid" class="grid"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
           <h2>Experience</h2>
         </div>
         <div id="experienceGrid" class="grid"></div>
@@ -383,6 +482,7 @@
       <section class="panel">
         <div class="section-title">
           <h2>Certifications & Recognition</h2>
+          <a class="link-btn" href="Certifications.pdf" target="_blank" rel="noreferrer">View PDF</a>
         </div>
         <ul class="list" id="certList"></ul>
       </section>
@@ -391,7 +491,27 @@
 
   <script>
     const data = {
+      currentProjects: [
+        {
+          title: "Peace Bridge",
+          summary: "AI-assisted conflict-resolution and peacebuilding platform developed as part of the CPACT Lab research initiative at Kansas State University. Combines conversational AI with structured mediation workflows to support dialogue facilitation.",
+          tech: ["AI/LLM", "HuggingFace Spaces", "Docker", "Stripe"],
+          url: "https://huggingface.co/spaces/hishamsaif05/peacebridge-space"
+        },
+        {
+          title: "Invoice Maker — TechPortal LLC",
+          summary: "Production invoice management dashboard built for TechPortal LLC. Enables clients to create, manage, and export invoices with a clean, responsive UI.",
+          tech: ["Next.js", "React", "Supabase", "Vercel"],
+          url: "https://invoice-maker-pied-alpha.vercel.app/dashboard"
+        }
+      ],
       experience: [
+        {
+          role: "Full Stack Developer (Research Assistant)",
+          company: "Kansas State University",
+          timeline: "Nov 2025 · Present",
+          focus: "Building AI-assisted conflict-resolution platform for peacebuilding; designing CPACT Lab site with usability/accessibility focus; implementing modern frontend features to boost engagement and responsiveness."
+        },
         {
           role: "Full Stack Developer",
           company: "TechPortal LLC",
@@ -452,6 +572,8 @@
         { category: "Data/ML", items: ["OpenCV", "Pandas", "Power BI", "Tableau"] }
       ],
       certifications: [
+        "BigQuery for Data Analysts – Google Cloud via Coursera (Jan 2026)",
+        "Introduction to SQL for BigQuery and Cloud SQL – Google Cloud via Coursera (Sep 2025)",
         "AWS APAC - Solutions Architecture Job Simulation (Forage, Dec 2024)",
         "Palo Alto Beacon Cybersecurity Training (Dec 2021)",
         "IBM Introduction to Artificial Intelligence (Coursera, Oct 2020)",
@@ -461,6 +583,27 @@
         "Core Java - Certificate of Excellence (2019)"
       ]
     };
+
+    const currentProjectsGrid = document.getElementById("currentProjectsGrid");
+    data.currentProjects.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "current-project-card";
+      card.innerHTML = `
+        <div class="current-project-meta">
+          <h3 style="margin:0">${p.title}</h3>
+          <span class="live-badge"><span class="live-dot"></span>Live</span>
+        </div>
+        <p class="muted" style="margin:0">${p.summary}</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <div>${p.tech.map(t => `<span class="chip">${t}</span>`).join("")}</div>
+          <a class="visit-btn" href="${p.url}" target="_blank" rel="noreferrer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M14 3h7v7l-2-2-6 6-2-2 6-6-3-3zm-1 3H5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-8l-2 2v6H5V8h6l2-2z"/></svg>
+            Visit
+          </a>
+        </div>
+      `;
+      currentProjectsGrid.appendChild(card);
+    });
 
     const experienceGrid = document.getElementById("experienceGrid");
     data.experience.forEach(item => {
@@ -577,6 +720,8 @@
         document.body.style.backgroundImage = "";
       }
     }
+
+    setTheme("light");
 
     lightMode.addEventListener("click", () => setTheme("light"));
     darkMode.addEventListener("click", () => setTheme("dark"));
