@@ -573,15 +573,15 @@
         { category: "Data/ML", items: ["OpenCV", "Pandas", "Power BI", "Tableau"] }
       ],
       certifications: [
-        "BigQuery for Data Analysts – Google Cloud via Coursera (Jan 2026)",
-        "Introduction to SQL for BigQuery and Cloud SQL – Google Cloud via Coursera (Sep 2025)",
-        "AWS APAC - Solutions Architecture Job Simulation (Forage, Dec 2024)",
-        "Palo Alto Beacon Cybersecurity Training (Dec 2021)",
-        "IBM Introduction to Artificial Intelligence (Coursera, Oct 2020)",
-        "Programming for Everybody - Python (Coursera, Jun 2020)",
-        "J-HUB Hackathon League - Certificate of Merit (2019, 1st place)",
-        "Ethical Hacking and Cyber Security, Indian Servers & Sphoorthy (Mar 2019)",
-        "Core Java - Certificate of Excellence (2019)"
+        { text: "BigQuery for Data Analysts – Google Cloud via Coursera (Jan 2026)", url: "https://www.coursera.org/account/accomplishments/verify/9JXEG922XPVJ" },
+        { text: "Introduction to SQL for BigQuery and Cloud SQL – Google Cloud via Coursera (Sep 2025)", url: "https://www.coursera.org/account/accomplishments/verify/CRGHU91W9WRV" },
+        { text: "AWS APAC - Solutions Architecture Job Simulation (Forage, Dec 2024)", url: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/pmnMSL4QiQ9JCgE3W/kkE9HyeNcw6rwCRGw_pmnMSL4QiQ9JCgE3W_9DKMGEWgr8SfLGhcD_1733899943263_completion_certificate.pdf" },
+        { text: "Palo Alto Beacon Cybersecurity Training (Dec 2021)", url: "https://www.linkedin.com/in/hisham-saif-mohamad-5b410719b/details/certifications/275139453/multiple-media-viewer/?profileId=ACoAAC7S7pgBIN2LM-Gye_TRaULpySOhmRQfQog&treasuryMediaId=1733294444078" },
+        { text: "IBM Introduction to Artificial Intelligence (Coursera, Oct 2020)", url: "https://www.coursera.org/account/accomplishments/certificate/ZRLHRXF25UD4" },
+        { text: "Programming for Everybody - Python (Coursera, Jun 2020)", url: "https://www.coursera.org/account/accomplishments/certificate/MR44A6XNVYEJ" },
+        { text: "J-HUB Hackathon League - Certificate of Merit (2019, 1st place)" },
+        { text: "Ethical Hacking and Cyber Security, Indian Servers & Sphoorthy (Mar 2019)" },
+        { text: "Core Java - Certificate of Excellence (2019)", url: "https://www.linkedin.com/in/hisham-saif-mohamad-5b410719b/details/certifications/1818342553/multiple-media-viewer/?profileId=ACoAAC7S7pgBIN2LM-Gye_TRaULpySOhmRQfQog&treasuryMediaId=1732690163659" }
       ]
     };
 
@@ -695,7 +695,17 @@
     const certList = document.getElementById("certList");
     data.certifications.forEach(cert => {
       const li = document.createElement("li");
-      li.textContent = cert;
+      li.style.display = "flex";
+      li.style.alignItems = "center";
+      li.style.justifyContent = "space-between";
+      li.style.gap = "12px";
+      li.innerHTML = `
+        <span>${cert.text}</span>
+        ${cert.url ? `<a class="visit-btn" style="flex-shrink:0;font-size:12px;padding:6px 11px" href="${cert.url}" target="_blank" rel="noreferrer">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M14 3h7v7l-2-2-6 6-2-2 6-6-3-3zm-1 3H5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-8l-2 2v6H5V8h6l2-2z"/></svg>
+          View
+        </a>` : ""}
+      `;
       certList.appendChild(li);
     });
 
